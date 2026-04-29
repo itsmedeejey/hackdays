@@ -3,22 +3,29 @@
 import { useEffect, useState } from "react";
 import PostCommentCard from "./postCommentCard";
 import api from "@/config/axios";
+import { useParams } from "next/navigation";
 
-type Comment =
-  {
-    id: number;
-    text: string;
+type Comment = {
+  id: string;
+  postId: string;
+  content: string;
+  user: {
+    id: string;
+    name: string;
   };
+};
 
 export default function CommentsCard() {
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
+  const params = useParams()
+  const postId = params.id as string;
 
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await api.get("/api/comments");
-        setComments(res.data);
+        const res = await api.get(`/api/comments/post/${postId}`);
+        setComments(res.data.comments);
       } catch (err) {
         console.error(err);
       } finally {
@@ -27,23 +34,36 @@ export default function CommentsCard() {
     };
 
     fetchComments();
-  }, []);
+  }, [postId]);
 
   // optimistic update
-  const addComment = async (text: string) => {
+
+  const addComment = async (content: string) => {
     const newComment: Comment = {
-      id: Date.now(),
-      text,
+      id: `temp-${Date.now()}`,
+      postId: postId,
+      content,
+      user: {
+        id: "temp",
+        name: "You",
+      },
     };
 
     setComments((prev) => [newComment, ...prev]);
 
     try {
-      await api.post("/api/comments", text);
+      const res = await api.post("/api/comments/create",
+        {
+          postId: postId,
+          content: content,
+        });
+
     } catch (err) {
       console.error(err);
     }
   };
+  const getInitial = (name: string) =>
+    name.charAt(0).toUpperCase();
 
   return (
     <div className="max-w-full mx-auto mt-15 space-y-4">
@@ -62,9 +82,18 @@ export default function CommentsCard() {
           comments.map((c) => (
             <div
               key={c.id}
-              className="p-2 bg-gray-100 rounded-lg text-sm"
+              className="flex items-start gap-3 p-3 bg-gray-100 rounded-lg"
             >
-              {c.text}
+              {/* Avatar */}
+              <div className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white text-sm font-semibold">
+                {getInitial(c.user?.name || "U")}
+              </div>
+
+              {/* Content */}
+              <div>
+                <p className="text-sm font-semibold">{c.user?.name || "Unknown"}</p>
+                <p className="text-sm text-gray-700">{c.content}</p>
+              </div>
             </div>
           ))
         )}
