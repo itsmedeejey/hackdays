@@ -30,7 +30,8 @@ export default function DashBoard() {
 
   const [images, setImages] = useState<File[]>([]);
 
-  // ---------------- HANDLER ----------------
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -42,7 +43,6 @@ export default function DashBoard() {
     setForm((prev) => ({ ...prev, postType: type }));
   };
 
-  // ---------------- SUBMIT ----------------
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -59,13 +59,11 @@ export default function DashBoard() {
 
     const formData = new FormData();
 
-    // ---------- BASE ----------
     formData.append("title", form.title);
     formData.append("description", form.description);
     formData.append("postType", form.postType);
     formData.append("state", form.state);
 
-    // ---------- LOCATION ----------
     formData.append(
       "location",
       JSON.stringify({
@@ -75,7 +73,6 @@ export default function DashBoard() {
       })
     );
 
-    // ---------- TYPE SPECIFIC ----------
     if (form.postType === "PLACE") {
       formData.append(
         "metadata",
@@ -146,6 +143,7 @@ export default function DashBoard() {
     }
 
     try {
+      setIsLoading(true)
       const res = await api.post("api/post/create", formData);
       console.log(res.data);
 
@@ -171,6 +169,8 @@ export default function DashBoard() {
       setImages([]);
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsLoading(false)
     }
   };
 
@@ -362,10 +362,20 @@ export default function DashBoard() {
           ))}
         </div>
 
-        <button className="bg-black text-white px-4 py-2 rounded w-full cursor-pointer">
-          Upload
-        </button>
+        {isLoading ?
+          (
+            <button className="bg-black text-white px-4 py-2 rounded w-full cursor-pointer">
+
+              Uploading...please wait
+            </button>
+          ) : (
+            <button className="bg-black text-white px-4 py-2 rounded w-full cursor-pointer">
+
+              Upload
+            </button>
+          )
+        }
       </form>
-    </div>
+    </div >
   );
 }

@@ -65,7 +65,7 @@ export default function PostPage() {
   }, [params.id]);
 
   if (!post) {
-    return <div>Loading...</div>;
+    return <div className="flex h-screen text-center justify-center items-center">Loading...</div>;
   }
 
   const nextSlide = () => {

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import api from "@/config/axios"
 import axios from "axios"
 import { useUserStore } from "@/store/useUserStore"
+import { Upload } from "lucide-react";
 
 export default function ProfileCard() {
   const [loading, setLoading] = useState(true)
@@ -58,19 +59,11 @@ export default function ProfileCard() {
         <div className="flex flex-col gap-2">
           <button
             onClick={handleLogout}
-            className="px-4 py-1 bg-gray-500 text-white rounded-md"
+            className="px-4 py-1 bg-gray-500 text-white rounded-full hover:bg-red-600 cursor-pointer"
           >
             Logout
           </button>
 
-          {isContributor && (
-            <button
-              onClick={() => router.push("/contribute")}
-              className="px-4 py-1 bg-green-600 text-white rounded-md"
-            >
-              Upload
-            </button>
-          )}
         </div>
       </div>
 
@@ -85,6 +78,8 @@ export default function ProfileCard() {
           <p className="text-gray-500 text-sm">{user?.email}</p>
         </div>
       </div>
+
+
 
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -107,6 +102,22 @@ export default function ProfileCard() {
           <h2 className="text-2xl font-bold text-orange-600">{user?.counts?.services ?? 0}</h2>
         </div>
 
+      </div>
+
+      <div className="flex justify-center mt-5">
+        {isContributor && (
+          <button
+            onClick={() => router.push("/contribute")}
+            className="flex items-center gap-2 px-6 py-2 
+                 bg-black cursor-pointer text-white 
+                 rounded-full 
+                 shadow-md hover:shadow-lg 
+                 transition-all duration-200"
+          >
+            <Upload size={18} />
+            Contribute
+          </button>
+        )}
       </div>
     </div>
   )

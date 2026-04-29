@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { commentService } from "./comments.services";
 
 export const commentController = {
+
   // Create comment
   async createComment(req: Request, res: Response) {
     try {

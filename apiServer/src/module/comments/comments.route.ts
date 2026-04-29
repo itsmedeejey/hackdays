@@ -5,7 +5,7 @@ import { authMiddleware } from "../../middleware/auth.middleware";;
 const route = Router();
 
 // Create comment
-route.post("/", authMiddleware, commentController.createComment);
+route.post("/create", authMiddleware, commentController.createComment);
 
 // Get comments by post
 route.get("/post/:postId", commentController.getCommentsByPost);

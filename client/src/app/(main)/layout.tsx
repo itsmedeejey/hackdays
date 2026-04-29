@@ -1,5 +1,4 @@
 // app/(main)/layout.tsx
-
 "use client"
 
 import NavBar from "@/components/navBar";
