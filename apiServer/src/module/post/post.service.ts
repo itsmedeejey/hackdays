@@ -101,6 +101,7 @@ export const PostService = {
   },
 
   // GET ALL POSTS
+  // for python service
   async getAllPost() {
     try {
       const posts = await prisma.post.findMany({

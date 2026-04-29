@@ -59,22 +59,22 @@ export default function Chatbot() {
     }
   };
 
+  //TODO:   add condition rendering on the talk to bohagi lable in timer
   return (
     <>
-      {/* Floating Button */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded-full shadow-lg z-50 cursor-pointer"
-      >
-        Talk to Bohagi
-      </button>
+      <div className="bg-white  fixed bottom-27 right-20 cursor-pointer z-50 p-2 w-fit rounded-l-full rounded-tr-full">
+        talk to Bohagi
+      </div>
+
+      <img src="/japi.png" alt="bohagi" className=" fixed bottom-10 right-10  w-20 cursor-pointer z-50"
+        onClick={() => setIsOpen(true)} />
 
       {/* Chat Popup */}
       {isOpen && (
-        <div className="fixed bottom-5 right-5 w-80 h-[450px] bg-white shadow-xl rounded-2xl flex flex-col overflow-hidden z-50">
+        <div className="fixed bottom-10 right-13 w-90 h-[550px] bg-white shadow-xl rounded-2xl flex flex-col overflow-hidden z-50">
 
           {/* Header */}
-          <div className="bg-amber-700 text-white p-3 flex justify-between items-center">
+          <div className="bg-emerald-500 text-white p-3 flex justify-between items-center">
             <div className="flex items-center gap-2">
               <div className="h-8 w-8 bg-white text-black rounded-full flex items-center justify-center font-bold">
                 B
@@ -82,7 +82,7 @@ export default function Chatbot() {
               <div className="font-semibold">Bohagi</div>
             </div>
 
-            <button onClick={() => setIsOpen(false)}>✕</button>
+            <button className="cursor-pointer" onClick={() => setIsOpen(false)}>✕</button>
           </div>
 
           {/* Messages */}

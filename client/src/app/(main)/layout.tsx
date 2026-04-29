@@ -14,7 +14,7 @@ export default function MainLayout({
   useAuth()
 
   return (
-    <div>
+    <div  >
       <NavBar />
       <Chatbot></Chatbot>
 

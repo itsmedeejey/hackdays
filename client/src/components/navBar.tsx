@@ -21,7 +21,7 @@ export default function NavBar() {
     }`;
 
   return (
-    <div className="px-10 mt-5 h-10 w-full rounded-2xl flex items-center justify-center">
+    <div className="px-10 mt-5  h-10 w-full rounded-2xl flex items-center justify-center">
 
       <div className="flex  w-full justify-start ">
         <Link href="/">
@@ -29,17 +29,14 @@ export default function NavBar() {
         </Link>
       </div>
 
-      <div className="flex flex-row gap-10 justify-center font-medium">
-        <Link href="/?type=PLACE" className={itemClass("PLACE")}>
-          PLACES
-        </Link>
-        <Link href="/?type=EVENT" className={itemClass("EVENT")}>
-          EVENTS
-        </Link>
-        <Link href="/?type=SERVICE" className={itemClass("SERVICE")}>
-          SERVICES
-        </Link>
-      </div>
+      <Link href={"/discover"}>
+        <div className="bg-emerald-400 p-2 rounded-full text-white px-4 cursor-pointer"  >
+
+          EXPLORE
+
+        </div>
+
+      </Link>
 
       <div className="flex w-full justify-end items-center gap-3">
         {user && !isContributor && (

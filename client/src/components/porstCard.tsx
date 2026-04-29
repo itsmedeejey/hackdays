@@ -16,7 +16,9 @@ export default function PostCard({
   postType,
 }: PostCardType) {
   return (
-    <div className="w-full aspect-4/5 rounded-2xl overflow-hidden bg-emerald-600 text-white relative cursor-pointer transition-transform duration-300 ease-in-out hover:scale-[1.04] flex flex-col">
+    <div className="w-full aspect-4/5 rounded-2xl overflow-hidden  text-white relative cursor-pointer transition-transform duration-300 ease-in-out hover:scale-[1.04] flex flex-col
+bg-linear-to-t from-emerald-600 to-emerald-300 
+      ">
 
       {/* Badge */}
       <div className="absolute top-3 left-3 z-10 bg-black/50 backdrop-blur px-3 py-1 rounded-md text-sm font-medium">
@@ -29,7 +31,7 @@ export default function PostCard({
           fill
           alt={title}
           src={image}
-          className="object-cover"
+          className="object-cover rounded-b-lg"
         />
       </div>
 
