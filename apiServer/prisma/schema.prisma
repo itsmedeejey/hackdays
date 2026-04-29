@@ -19,13 +19,14 @@ enum postType {
 }
 
 model User {
-  id       String   @id @default(uuid())
+  id       String    @id @default(uuid())
   name     String
-  email    String   @unique
+  email    String    @unique
   password String
-  createAt DateTime @default(now())
+  createAt DateTime  @default(now())
   usertype usertype
   posts    Post[]
+  comments Comment[]
 }
 
 model Post {
@@ -51,8 +52,9 @@ model Post {
   location Location?
 
   // type-specific
-  event   Event?
-  service Service?
+  event    Event?
+  service  Service?
+  comments Comment[]
 
   // indexes
   @@index([userId])
@@ -105,4 +107,24 @@ model Service {
   isActive    Boolean @default(true)
 
   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+// COMMENTS SCHEMA
+model Comment {
+  id      String @id @default(uuid())
+  content String
+
+  // relations
+  userId String
+  postId String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  // timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([postId])
+  @@index([userId])
 }
