@@ -79,7 +79,8 @@ export default function PostPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-4 space-y-6 mt-10">
+
+    <div className="max-w-5xl mx-auto p-4 space-y-6 mt-10 ">
 
       {/* Carousel */}
       <div className="relative w-full  aspect-3/2 rounded-2xl overflow-hidden">
@@ -122,7 +123,7 @@ export default function PostPage() {
             <h3 className="font-semibold">Types</h3>
             <div className="flex flex-wrap gap-2 mt-1">
               {post.metadata.types.map((type, i) => (
-                <span key={i} className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">
+                <span key={i} className="px-3 py-1 bg-neutral-200 text-black rounded-full text-sm">
                   {type}
                 </span>
               ))}
@@ -135,7 +136,7 @@ export default function PostPage() {
             <h3 className="font-semibold">Activities</h3>
             <div className="flex flex-wrap gap-2 mt-1">
               {post.metadata.activities.map((act, i) => (
-                <span key={i} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
+                <span key={i} className="px-3 py-1 bg-neutral-200 text-black  rounded-full text-sm">
                   {act}
                 </span>
               ))}
@@ -143,12 +144,12 @@ export default function PostPage() {
           </div>
         )}
       </div>
+
       <div>
-
         <CommentsCard></CommentsCard>
-
       </div>
     </div>
+
   );
 }
 

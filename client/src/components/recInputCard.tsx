@@ -85,7 +85,7 @@ export default function RecInputCard() {
 
       <button
         onClick={handleSubmit}
-        className="bg-blue-500 text-white py-2 rounded-lg"
+        className="bg-blue-500 text-white py-2 rounded-lg cursor-pointer"
       >
         Get Recommendations
       </button>
