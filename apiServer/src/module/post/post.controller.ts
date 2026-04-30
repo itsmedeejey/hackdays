@@ -60,42 +60,35 @@ export const PostController = {
       const post = await PostService.createPost(finalBody);
 
 
-      if (post) {
-        try {
-          const response = await fetch(
-            `${process.env.PYTHON_API_URL}/run`,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
-          if (!response.ok) {
-            return res.status(502).json({
-              message: "Recommendation service failed",
-            });
-          }
-          const data = await response.json();
-          return res.json(data);
-        } catch (err) {
-          console.error(err);
-          return res.status(500).json({
-            message: "Internal server error",
-          });
-        }
+      if (!post) {
+        return res.status(500).json({
+          error: "Post creation failed",
+        });
       }
+
+      //-----------------------------------------------
+      // everytime a new post is created we send a post req to the rec. service /refresh-cache endpoint
+      // so the service can query the new data from our db 
+      // sendign req to Recommendation service for refreshing their cache
+      if (post) {
+        fetch(`${process.env.PYTHON_API_URL}/refresh-cache`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).catch((err) => {
+          console.error("Recommendation service failed:", err);
+        });
+      }
+      //-------------------------------
+
 
       return res.status(201).json({
         message: "Post processed successfully",
-        data: finalBody,
         post,
       });
-
-
     } catch (error) {
       console.error("UploadPost error:", error);
-
       // rollback only if images exist
       if (uploadedImages.length > 0) {
         await Promise.allSettled(
@@ -104,7 +97,6 @@ export const PostController = {
           )
         );
       }
-
       return res.status(500).json({
         error: "Failed to upload post",
       });
