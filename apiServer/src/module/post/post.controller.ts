@@ -59,11 +59,39 @@ export const PostController = {
 
       const post = await PostService.createPost(finalBody);
 
+
+      if (post) {
+        try {
+          const response = await fetch(
+            `${process.env.PYTHON_API_URL}/run`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          if (!response.ok) {
+            return res.status(502).json({
+              message: "Recommendation service failed",
+            });
+          }
+          const data = await response.json();
+          return res.json(data);
+        } catch (err) {
+          console.error(err);
+          return res.status(500).json({
+            message: "Internal server error",
+          });
+        }
+      }
+
       return res.status(201).json({
         message: "Post processed successfully",
         data: finalBody,
         post,
       });
+
 
     } catch (error) {
       console.error("UploadPost error:", error);
