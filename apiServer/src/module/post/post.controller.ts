@@ -69,7 +69,7 @@ export const PostController = {
       //-----------------------------------------------
       // everytime a new post is created we send a post req to the rec. service /refresh-cache endpoint
       // so the service can query the new data from our db 
-      // sendign req to Recommendation service for refreshing their cache
+      // 
       if (post) {
         fetch(`${process.env.PYTHON_API_URL}/refresh-cache`, {
           method: "POST",

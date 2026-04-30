@@ -85,24 +85,22 @@ export const PostService = {
     }
   },
 
-
-  // GET ALL POSTS
-  // for recommendation service
-  async getAll() {
-
-    try {
-      const posts = await prisma.post.findMany({
-        orderBy: {
-          createdAt: "desc",
-        }
-      })
-      return posts;
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-  },
-
+  // // GET ALL POSTS
+  // async getAll() {
+  //
+  //   try {
+  //     const posts = await prisma.post.findMany({
+  //       orderBy: {
+  //         createdAt: "desc",
+  //       }
+  //     })
+  //     return posts;
+  //   } catch (err) {
+  //     console.log(err);
+  //     throw err;
+  //   }
+  // },
+  //
 
   async getAllPost() {
     try {
