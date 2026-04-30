@@ -60,7 +60,7 @@ export default function Recomendation() {
                     title={post.title}
                     name={"Unknown"}
                     postType={post.postType}
-
+                    eventDate={post?.event?.endTime}
                     image={
                       post.images?.[0]?.url &&
                         post.images[0].url !== "#"

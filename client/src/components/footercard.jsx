@@ -38,7 +38,7 @@ export default function FooterCard() {
 
             <div className="flex gap-3 mt-2">
               <Link
-                href="/contribute"
+                href="/"
                 className="px-4 py-2 bg-white text-emerald-700 rounded-xl text-sm font-medium hover:bg-gray-100 transition"
               >
                 Contribute

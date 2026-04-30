@@ -55,6 +55,7 @@ export default function Home() {
                 title={post.title}
                 name={post.user?.name ?? "Unknown"}
                 postType={post.postType}
+                eventDate={post?.event?.endTime}
                 image={
                   post.images?.[0]?.url && post.images[0].url !== "#"
                     ? post.images[0].url
