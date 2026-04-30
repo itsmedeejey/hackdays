@@ -1,4 +1,3 @@
-# recommender/api/schemas.py
 from pydantic import BaseModel, Field
 
 class RecommendRequest(BaseModel):

@@ -113,7 +113,7 @@ def normalise_bulk(payload) -> list[dict]:
     """
     if isinstance(payload, list):
         entries = payload                       
-        elif isinstance(payload, dict):
+    elif isinstance(payload, dict):
         entries = payload.get("data", [])        
     else:
         return []

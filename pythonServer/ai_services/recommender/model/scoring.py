@@ -24,7 +24,7 @@ def compute_eco_score(place):
         for t in place.get("types") or []
     ]
     # fallback 0.3 if no types
-     type_score = sum(type_scores) / len(type_scores) if type_scores else 0.3
+    type_score = sum(type_scores) / len(type_scores) if type_scores else 0.3
 
     activity_scores = [
         eco_activity_weight.get(a.lower(), 0.3)
