@@ -1,6 +1,6 @@
 "use client";
 
-import PostCard from "@/components/porstCard";
+import PostCard from "@/components/postCard";
 import { useEffect, useState } from "react";
 import api from "@/config/axios";
 import { GetPostsResponse, Post } from "@/types/getAllPost.type";

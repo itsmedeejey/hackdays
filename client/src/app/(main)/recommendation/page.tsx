@@ -1,7 +1,7 @@
 "use client";
 
 import RecInputCard from "@/components/recInputCard";
-import PostCard from "@/components/porstCard";
+import PostCard from "@/components/postCard";
 import Link from "next/link";
 
 import { useRouter } from "next/navigation";

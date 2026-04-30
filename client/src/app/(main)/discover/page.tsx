@@ -1,6 +1,6 @@
 "use client";
 
-import PostCard from "@/components/porstCard";
+import PostCard from "@/components/postCard";
 import { useEffect, useState } from "react";
 import api from "@/config/axios";
 import { GetPostsResponse, Post } from "@/types/getAllPost.type";
@@ -34,27 +34,25 @@ export default function Discover() {
       ? selectedTypeParam
       : null;
 
-  // 🔹 Fetch all posts (only once)
-  const fetchAllPosts = async () => {
-    try {
-      setIsSearching(true);
-
-      const res = await api.get<GetPostsResponse>("/api/post/getPost");
-
-      setAllPosts(res.data.data);
-      setPosts(res.data.data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsSearching(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchAllPosts = async () => {
+      try {
+        setIsSearching(true);
+
+        const res = await api.get<GetPostsResponse>("/api/post/getPost");
+
+        setAllPosts(res.data.data);
+        setPosts(res.data.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsSearching(false);
+      }
+    };
+
     fetchAllPosts();
   }, []);
 
-  // 🔹 Search (ONLY when triggered from SearchBar)
   const searchPosts = async () => {
     try {
       setIsSearching(true);
