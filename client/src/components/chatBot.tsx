@@ -110,6 +110,11 @@ export default function Chatbot() {
 
           {/* Messages */}
           <div className="flex-1 p-3 overflow-y-auto space-y-2">
+            <div className="p-2 rounded-lg text-sm max-w-[75%] bg-gray-100 text-black">
+              Hi! I’m Bohagi 👋
+              Looking to explore Northeast India? I can help you with places, itineraries, food, budgets, and travel tips.
+            </div>
+
             {messages.map((msg) => (
               <div
                 key={msg.id}
