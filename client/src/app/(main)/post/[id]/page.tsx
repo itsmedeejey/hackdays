@@ -78,6 +78,10 @@ export default function PostPage() {
     );
   };
 
+
+  const startDate = post.event.startTime.split('T')[0]
+
+  const endDate = post.event.endTime.split('T')[0]
   return (
 
     <div className="max-w-5xl mx-auto p-4 space-y-6 mt-10 ">
@@ -143,6 +147,21 @@ export default function PostPage() {
             </div>
           </div>
         )}
+        {post.event?.startTime && (
+          <div>
+            <h3 className="font-semibold">Event Timing</h3>
+            <div className="flex flex-wrap gap-2 mt-1">
+              <span className="px-3 py-1  text-black  rounded-full text-sm">
+                {startDate}
+              </span>
+              <span>to </span>
+              <span className="px-3 py-1  text-black  rounded-full text-sm">
+                {endDate}
+              </span>
+            </div>
+          </div>
+        )}
+
       </div>
 
       <div>
