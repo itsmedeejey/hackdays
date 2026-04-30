@@ -42,7 +42,9 @@ export default function RecInputCard() {
     router.push("/recommendation");
   };
 
-  if ((recommendation || result?.length) && !showForm) {
+  const hasResult = result && result.length > 0;
+
+  if (hasResult && !showForm) {
     return (
       <div className="max-w-xl w-xl mx-auto p-5 border rounded-xl shadow-sm bg-white flex flex-col gap-4 text-center">
         <button

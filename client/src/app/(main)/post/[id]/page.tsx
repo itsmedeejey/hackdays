@@ -79,9 +79,9 @@ export default function PostPage() {
   };
 
 
-  const startDate = post.event.startTime.split('T')[0]
+  const startDate = post.event?.startTime.split('T')[0]
 
-  const endDate = post.event.endTime.split('T')[0]
+  const endDate = post.event?.endTime.split('T')[0]
   return (
 
     <div className="max-w-5xl mx-auto p-4 space-y-6 mt-10 ">
