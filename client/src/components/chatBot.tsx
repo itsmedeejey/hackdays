@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import api from "@/config/axios";
+import { setTimeout } from "timers";
 
 type Message = {
   id: number;
@@ -14,6 +15,8 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const [Isshowing, setIshowing] = useState(true);
 
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
@@ -59,12 +62,25 @@ export default function Chatbot() {
     }
   };
 
+
+  setTimeout(() => {
+    setIshowing(false)
+  }, 10000)
+
+
   //TODO:   add condition rendering on the talk to bohagi lable in timer
   return (
     <>
-      <div className="bg-white  fixed bottom-27 right-20 cursor-pointer z-50 p-2 w-fit rounded-l-full rounded-tr-full">
-        talk to Bohagi
-      </div>
+
+      {Isshowing ? (
+        <div className="bg-white  fixed bottom-27 right-20 cursor-pointer z-50 p-2 w-fit rounded-l-full rounded-tr-full">
+          talk to Bohagi
+        </div>
+      ) : (
+
+        <div>
+        </div>
+      )}
 
       <img src="/japi.png" alt="bohagi" className=" fixed bottom-10 right-10  w-20 cursor-pointer z-50"
         onClick={() => setIsOpen(true)} />
