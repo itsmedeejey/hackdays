@@ -29,7 +29,6 @@ export default function ProfileCard() {
   return (
     <div className="w-full max-w-4xl bg-white p-6 rounded-2xl shadow-md border border-gray-200 flex flex-col gap-6">
 
-      {/* Header */}
       <div className="flex justify-end items-center">
         <button
           onClick={handleLogout}
@@ -39,7 +38,6 @@ export default function ProfileCard() {
         </button>
       </div>
 
-      {/* User Info */}
       <div className="flex items-center gap-4">
         <div className="w-14 h-14 flex items-center justify-center rounded-full bg-amber-800 text-white text-xl font-bold">
           {user.name.charAt(0).toUpperCase()}
@@ -79,7 +77,6 @@ export default function ProfileCard() {
 
       </div>
 
-      {/* Contributor Button */}
       {isContributor && (
         <div className="flex justify-center mt-5">
           <button

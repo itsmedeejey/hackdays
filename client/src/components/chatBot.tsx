@@ -69,7 +69,6 @@ export default function Chatbot() {
   }, 10000)
 
 
-  //TODO:   add condition rendering on the talk to bohagi lable in timer
   return (
     <>
 
@@ -86,15 +85,14 @@ export default function Chatbot() {
       {/* <img src="/japi.png" alt="bohagi" className=" fixed bottom-10 right-10  w-20 cursor-pointer z-50 " */}
       {/*   onClick={() => setIsOpen(true)} /> */}
       {/**/}
+
       <img src="/img/bohagi.jpg" alt="bohagi" className=" rounded-full fixed bottom-10 right-13  w-15 cursor-pointer z-50 "
         onClick={() => setIsOpen(true)} />
 
 
-      {/* Chat Popup */}
       {isOpen && (
         <div className="fixed bottom-10 right-13 w-90 h-[550px] bg-white shadow-xl rounded-2xl flex flex-col overflow-hidden z-50">
 
-          {/* Header */}
           <div className=" text-white p-3 flex justify-between items-center bg-radial-[at_50%_99%] from-emerald-100 via-emerald-500 to-emerald-600 to-90%  ">
             <div className="flex items-center gap-2">
               <div className="h-10 w-10 rounded-full overflow-hidden bg-white flex items-center justify-center ">

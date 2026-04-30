@@ -40,12 +40,10 @@ export default function TagInputCard({ selected, setSelected }: Props) {
   return (
     <div className="w-full  relative">
 
-      {/* Input container */}
       <div
         className="flex flex-wrap  items-center gap-2 border-2 border-blue-400 rounded-lg p-2 focus-within:ring-2 focus-within:ring-blue-300"
         onClick={() => setOpen(true)}
       >
-        {/* Chips */}
         {selected.map((tag) => (
           <div
             key={tag}
@@ -75,7 +73,6 @@ export default function TagInputCard({ selected, setSelected }: Props) {
         />
       </div>
 
-      {/* Dropdown */}
       {open && filtered.length > 0 && (
         <div className="absolute z-10 w-full border rounded-md mt-1 max-h-60 overflow-y-auto shadow bg-white">
           {filtered.map((tag) => (

@@ -1,4 +1,3 @@
-# recommender/chatbot/intent.py
 
 RECOMMEND_SIGNALS = {
     "suggest", "recommend", "find", "show", "places", "where",
@@ -20,12 +19,10 @@ def extract_filters(message: str) -> dict:
     filters = {}
     msg = message.lower()
 
-    # budget: "under 2000", "budget 1500", "less than 3000"
     budget_match = re.search(r'(?:under|below|less than|budget|within)\s*₹?\s*(\d+)', msg)
     if budget_match:
         filters["budget"] = int(budget_match.group(1))
 
-    # state names
     states = [
         "assam", "meghalaya", "nagaland", "manipur", "mizoram",
         "tripura", "arunachal pradesh", "sikkim"
@@ -35,7 +32,6 @@ def extract_filters(message: str) -> dict:
             filters["state"] = state.title()
             break
 
-    # months
     months = {
         "january": "Jan", "february": "Feb", "march": "Mar",
         "april": "Apr", "may": "May", "june": "Jun",

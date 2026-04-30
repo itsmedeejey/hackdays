@@ -68,7 +68,6 @@ export default function UploadImageCard({
 
   return (
     <div className="w-full">
-      {/* Hidden Input */}
       <input
         ref={inputRef}
         type="file"
@@ -78,7 +77,6 @@ export default function UploadImageCard({
         className="hidden"
       />
 
-      {/* Drop Zone */}
       <div
         onClick={handleClick}
         onDragOver={handleDragOver}

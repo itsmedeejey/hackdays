@@ -40,7 +40,6 @@ export default function CommentsCard() {
   }, [postId]);
 
   // optimistic update
-
   const addComment = async (content: string) => {
     const newComment: Comment = {
       id: `temp-${Date.now()}`,

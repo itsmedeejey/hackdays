@@ -61,7 +61,6 @@ export default function RecInputCard() {
         Get Recommendations
       </h2>
 
-      {/* Tags */}
       <div>
         <label className="block text-sm font-medium text-gray-600 mb-2">
           Select Interests
@@ -69,7 +68,6 @@ export default function RecInputCard() {
         <TagInputCard selected={tags} setSelected={setTags} />
       </div>
 
-      {/* State */}
       <div>
         <label className="block text-sm font-medium text-gray-600 mb-2">
           Enter the name of the State you want recommendation from
@@ -83,7 +81,6 @@ export default function RecInputCard() {
         />
       </div>
 
-      {/* Budget */}
       <div>
         <label className="block text-sm font-medium text-gray-600 mb-2">
           Budget
@@ -99,7 +96,6 @@ export default function RecInputCard() {
         />
       </div>
 
-      {/* Submit */}
       <button
         onClick={handleSubmit}
         className="bg-blue-500 text-white py-2 rounded-lg cursor-pointer"
@@ -107,7 +103,6 @@ export default function RecInputCard() {
         Get Recommendations
       </button>
 
-      {/* Optional Cancel (only if data exists) */}
       {(recommendation || result?.length) && (
         <button
           onClick={() => setShowForm(false)}

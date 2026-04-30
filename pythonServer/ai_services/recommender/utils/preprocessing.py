@@ -71,6 +71,5 @@ def _normalise_db_post(post: dict) -> dict:
         "activities":    [],
         "budget_min":    0,
         "budget_max":    9999,
-        # combined_text is what similarity.py reads for embeddings
         "combined_text": f"{name} {description} {state} {' '.join(tags)}".strip(),
     }

@@ -1,4 +1,3 @@
-# psg_db.py
 import psycopg2
 import os
 

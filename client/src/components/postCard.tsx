@@ -31,6 +31,7 @@ export default function PostCard({
     const endDate = new Date(eventDate).getTime();
     const now = Date.now();
     setIsUpcoming(endDate > now);
+
   }, [postType, eventDate]);
 
   return (

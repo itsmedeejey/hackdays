@@ -1,4 +1,3 @@
-# recommender/api/ingestion.py
 import uuid
 
 MONTH_ALIASES = {
@@ -82,7 +81,6 @@ def normalise(payload: dict) -> dict:
     description = payload.get("description", "")
     post_type   = payload.get("postType", "PLACE").upper()
 
-    # budget is optional in some entries
     budget_min  = meta.get("budgetMin", 0) or 0
     budget_max  = meta.get("budgetMax", 9999) or 9999
 
@@ -114,9 +112,9 @@ def normalise_bulk(payload) -> list[dict]:
     - A wrapped dict: {"message":..., "data": [...]}
     """
     if isinstance(payload, list):
-        entries = payload                        # ← new flat format
-    elif isinstance(payload, dict):
-        entries = payload.get("data", [])        # ← old wrapped format
+        entries = payload                       
+        elif isinstance(payload, dict):
+        entries = payload.get("data", [])        
     else:
         return []
 

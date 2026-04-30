@@ -1,4 +1,3 @@
-# recommender/chatbot/bot.py
 import os
 from groq import Groq
 
