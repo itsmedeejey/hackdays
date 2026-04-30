@@ -1,10 +1,22 @@
+# recommender/model/filters.py
+import torch
 from datetime import datetime
 
 CURRENT_MONTH = datetime.now().strftime("%b")
 
-def filter_candidates(places, budget=None, month=None, types=None, state=None):
-    results = []
-    for p in places:
+def filter_candidates(
+    places: list[dict],
+    embeddings: torch.Tensor,
+    budget=None,
+    month=None,
+    types=None,
+    state=None,
+) -> tuple[list[dict], torch.Tensor]:
+
+    kept_places = []
+    kept_indices = []
+
+    for i, p in enumerate(places):
         best_months = p.get("best_months") or []
 
         if budget is not None:
@@ -25,6 +37,11 @@ def filter_candidates(places, budget=None, month=None, types=None, state=None):
             if place_state and place_state != state.lower().strip():
                 continue
 
-        results.append(p)
+        kept_places.append(p)
+        kept_indices.append(i)
 
-    return results if results else places  
+    if not kept_places:
+        return places, embeddings
+
+    filtered_embeddings = embeddings[kept_indices]
+    return kept_places, filtered_embeddings

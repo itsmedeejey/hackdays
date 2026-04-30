@@ -1,7 +1,7 @@
 
 
 from recommender.model.scoring import compute_eco_score, compute_popularity
-from recommender.model.similarity import build_place_corpus, compute_similarity
+from recommender.model.similarity import compute_similarity
 
 
 
@@ -77,11 +77,14 @@ def compute_final_score(place, similarity, weights: tuple) -> float:
     )
 
 
-def rank_places(user_query: str, places: list) -> list:
+def rank_places(user_query: str, places: list, place_embeddings=None) -> list:
     places = enrich_places(places)
-    place_embeddings = build_place_corpus(places)
-    similarities = compute_similarity(user_query, place_embeddings)
 
+    if place_embeddings is None:
+        from recommender.model.similarity import build_place_corpus
+        place_embeddings = build_place_corpus(places)
+        
+    similarities = compute_similarity(user_query, place_embeddings)
     TYPE_INTENT_MAP = {
     "cultural":  {"cultural", "historical", "religious", "heritage"},
     "eco":       {"eco", "nature", "wildlife"},

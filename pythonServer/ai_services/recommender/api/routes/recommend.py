@@ -5,23 +5,25 @@ from recommender.api.schemas import (
 )
 from recommender.model.ranker import rank_places
 from recommender.model.filters import filter_candidates
-from recommender.utils.preprocessing import load_internal_places
+from recommender.model.similarity import get_cached_corpus   # ← only change at top
 
 router = APIRouter()
-
 
 @router.post("/recommend", response_model=RecommendResponse)
 def recommend(req: RecommendRequest):
     try:
-        places = load_internal_places()
-        candidates = filter_candidates(
-            places,
+        all_posts, all_embeddings = get_cached_corpus()   # ← both posts + tensor
+
+        candidates, candidate_embeddings = filter_candidates(
+            all_posts,
+            all_embeddings,                               # ← pass tensor in
             budget=req.budget,
             month=req.month,
             types=req.types,
             state=req.state
         )
-        ranked = rank_places(req.query, candidates)
+
+        ranked = rank_places(req.query, candidates, candidate_embeddings)  # ← pass tensor through
         top = ranked[:req.top_k]
 
         results = []
