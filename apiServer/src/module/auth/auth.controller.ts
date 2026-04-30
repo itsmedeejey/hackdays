@@ -124,7 +124,7 @@ const contributor = async (req: Request, res: Response) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: false,
-      sameSite: "strict"
+      sameSite: "lax"
     });
 
     return res.status(200).json({
