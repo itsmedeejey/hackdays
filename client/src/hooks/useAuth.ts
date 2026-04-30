@@ -12,7 +12,7 @@ export const useAuth = () => {
       try {
         setLoading(true);
 
-        const res = await api.get("/api/auth/getme", {
+        const res = await api.get("/api/auth/getAuthMe", {
         });
 
         setUser(res.data);
@@ -24,5 +24,6 @@ export const useAuth = () => {
     };
 
     fetchMe();
+
   }, [user, setUser, setLoading]);
 };

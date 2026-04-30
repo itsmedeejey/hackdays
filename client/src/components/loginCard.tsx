@@ -43,7 +43,7 @@ export default function LoginCard() {
       className="kw-full max-w-xl bg-white p-8 rounded-2xl shadow-md border border-gray-200 flex flex-col gap-5"
     >
       <h1 className="text-gray-800 font-semibold text-2xl text-center">
-        Enter your Details
+        Login to enjoy all the feature
       </h1>
 
       {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -70,6 +70,12 @@ export default function LoginCard() {
       >
         {loading ? "Loging up..." : "LogIn"}
       </button>
+
+      <div className="text-center">
+        do not have an acount? <a className="underline text-blue-500" href="/signup">sign up</a>
+
+      </div>
+
     </form>
   );
 }

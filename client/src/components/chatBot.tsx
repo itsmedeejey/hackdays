@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import api from "@/config/axios";
 import { setTimeout } from "timers";
+import { SendHorizontal } from 'lucide-react';
 
 type Message = {
   id: number;
@@ -81,24 +82,30 @@ export default function Chatbot() {
         <div>
         </div>
       )}
-
-      <img src="/japi.png" alt="bohagi" className=" fixed bottom-10 right-10  w-20 cursor-pointer z-50"
+      {/**/}
+      {/* <img src="/japi.png" alt="bohagi" className=" fixed bottom-10 right-10  w-20 cursor-pointer z-50 " */}
+      {/*   onClick={() => setIsOpen(true)} /> */}
+      {/**/}
+      <img src="/img/bohagi.jpg" alt="bohagi" className=" rounded-full fixed bottom-10 right-13  w-15 cursor-pointer z-50 "
         onClick={() => setIsOpen(true)} />
+
 
       {/* Chat Popup */}
       {isOpen && (
         <div className="fixed bottom-10 right-13 w-90 h-[550px] bg-white shadow-xl rounded-2xl flex flex-col overflow-hidden z-50">
 
           {/* Header */}
-          <div className="bg-emerald-500 text-white p-3 flex justify-between items-center">
+          <div className=" text-white p-3 flex justify-between items-center bg-radial-[at_50%_99%] from-emerald-100 via-emerald-500 to-emerald-600 to-90%  ">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 bg-white text-black rounded-full flex items-center justify-center font-bold">
-                B
+              <div className="h-10 w-10 rounded-full overflow-hidden bg-white flex items-center justify-center ">
+                <img
+                  src="/img/bohagi.jpg"
+                  alt="B"
+                  className="h-full w-full object-cover "
+                />
               </div>
-              <div className="font-semibold">Bohagi</div>
-            </div>
-
-            <button className="cursor-pointer" onClick={() => setIsOpen(false)}>✕</button>
+              <div className="font-semibold text-sm">Bohagi</div>
+            </div>            <button className="cursor-pointer" onClick={() => setIsOpen(false)}>✕</button>
           </div>
 
           {/* Messages */}
@@ -130,14 +137,15 @@ export default function Chatbot() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
               placeholder="Ask Bohagi..."
-              className="flex-1 border rounded-lg px-2 py-1 text-sm"
+              className="flex-1 border rounded-full px-2 py-1 w-full text-sm"
             />
             <button
               onClick={sendMessage}
-              className="bg-black text-white px-3 rounded-lg cursor-pointer"
+              className="text-white  rounded-lg cursor-pointer"
               disabled={loading}
             >
-              Ask
+
+              <SendHorizontal color="blue" size={30} />
             </button>
           </div>
         </div>

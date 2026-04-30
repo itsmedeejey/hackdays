@@ -137,7 +137,25 @@ const contributor = async (req: Request, res: Response) => {
   }
 };
 
+// to get user details for frontend protected routes redirection
+const getAuthMe = async (req: Request, res: Response) => {
+  const user = req.user;
 
+  if (!user) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const { id, name, email, usertype } = user;
+
+  return res.status(200).json({
+    id,
+    name,
+    email,
+    userType: usertype,
+  });
+};
+
+// for user profile
 const getme = async (req: Request, res: Response) => {
   const user = (req as any).user;
 
@@ -188,6 +206,7 @@ export default {
   contributor,
   contributorSignup,
   getme,
+  getAuthMe,
   logout
 };
 

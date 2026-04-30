@@ -80,6 +80,11 @@ export default function SignUpCard() {
       >
         {loading ? "Signing up..." : "Sign Up"}
       </button>
+
+      <div className="text-center">
+        Already have an acount? <a className="underline text-blue-500" href="/login">login up</a>
+
+      </div>
     </form>
   );
 }

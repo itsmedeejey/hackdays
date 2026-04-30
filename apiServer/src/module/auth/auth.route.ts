@@ -12,6 +12,9 @@ route.post("/contributor", authcontroller.contributor);
 route.post("/contributorSignup", authcontroller.contributorSignup);
 
 route.get("/getme", authMiddleware, authcontroller.getme)
+
+route.get("/getAuthMe", authMiddleware, authcontroller.getAuthMe)
+
 route.post("/logout", authcontroller.logout);
 
 export default route;

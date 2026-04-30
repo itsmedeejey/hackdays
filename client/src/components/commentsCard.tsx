@@ -21,11 +21,14 @@ export default function CommentsCard() {
   const params = useParams()
   const postId = params.id as string;
 
+  const [total, setTotal] = useState("");
+
   useEffect(() => {
     const fetchComments = async () => {
       try {
         const res = await api.get(`/api/comments/post/${postId}`);
         setComments(res.data.comments);
+        setTotal((res.data.total))
       } catch (err) {
         console.error(err);
       } finally {
@@ -72,8 +75,8 @@ export default function CommentsCard() {
       <PostCommentCard onSubmit={addComment} />
 
       <div className="bg-white p-3 rounded-xl shadow space-y-2">
-        <h3 className="font-semibold text-sm">Reviews</h3>
 
+        <div className="font-semibold"> Total reviews: {total} </div>
         {loading ? (
           <p className="text-sm text-gray-500">Loading...</p>
         ) : comments.length === 0 ? (
@@ -84,12 +87,10 @@ export default function CommentsCard() {
               key={c.id}
               className="flex items-start gap-3 p-3 bg-gray-100 rounded-lg"
             >
-              {/* Avatar */}
               <div className="w-8 h-8 p-3 flex items-center justify-center rounded-full bg-black text-white text-sm font-semibold">
                 {getInitial(c.user?.name || "U")}
               </div>
 
-              {/* Content */}
               <div>
                 <p className="text-sm font-semibold">{c.user?.name || "Unknown"}</p>
                 <p className="text-sm text-gray-700">{c.content}</p>
