@@ -148,23 +148,6 @@ export const PostController = {
     }
   },
 
-  async getAll(req: Request, res: Response) {
-    try {
-      const posts = await PostService.getAll();
-
-      return res.status(200).json({
-        message: "Posts fetched successfully",
-        data: posts,
-      });
-
-    } catch (error) {
-      console.error("getAll error:", error);
-
-      return res.status(500).json({
-        error: "Failed to fetch posts",
-      });
-    }
-  }
 
 
 };
