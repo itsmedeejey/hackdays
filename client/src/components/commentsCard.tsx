@@ -85,7 +85,7 @@ export default function CommentsCard() {
               className="flex items-start gap-3 p-3 bg-gray-100 rounded-lg"
             >
               {/* Avatar */}
-              <div className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white text-sm font-semibold">
+              <div className="w-8 h-8 p-3 flex items-center justify-center rounded-full bg-black text-white text-sm font-semibold">
                 {getInitial(c.user?.name || "U")}
               </div>
 
