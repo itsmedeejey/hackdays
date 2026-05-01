@@ -1,23 +1,22 @@
-# api/routes/places.py
+# recommender/api/routes/places.py
 from fastapi import APIRouter, HTTPException
-from recommender.utils.preprocessing import load_internal_places
-import json, os
+from recommender.utils.preprocessing import load_from_db
+from recommender.model.similarity import invalidate_cache
+import psycopg2, os
 
 router = APIRouter()
-# DATA_PATH = "data/updated_formatted_places.json"
 
-# def load_places():
-#     with open(DATA_PATH) as f:
-#         return json.load(f)
+def _conn():
+    return psycopg2.connect(os.getenv("DATABASE_URL"))
 
 @router.get("/places")
 def get_all_places():
-    places = load_internal_places()
+    places = load_from_db()
     return {"total": len(places), "places": places}
 
 @router.get("/places/{place_id}")
 def get_place(place_id: str):
-    places = load_places()
+    places = load_from_db()
     match = next((p for p in places if p["place_id"] == place_id), None)
     if not match:
         raise HTTPException(status_code=404, detail=f"Place '{place_id}' not found")
@@ -25,14 +24,19 @@ def get_place(place_id: str):
 
 @router.delete("/places/{place_id}")
 def delete_place(place_id: str):
-    places = load_places()
-    filtered = [p for p in places if p["place_id"] != place_id]
-    if len(filtered) == len(places):
+    conn = _conn()
+    cur = conn.cursor()
+
+    # check exists first
+    cur.execute('SELECT id FROM "Post" WHERE id = %s', (place_id,))
+    if not cur.fetchone():
+        cur.close(); conn.close()
         raise HTTPException(status_code=404, detail=f"Place '{place_id}' not found")
-    with open(DATA_PATH, "w") as f:
-        json.dump(filtered, f, indent=2, ensure_ascii=False)
-    # bust cache
-    cache = "data/place_embeddings.pkl"
-    if os.path.exists(cache):
-        os.remove(cache)
+
+    cur.execute('DELETE FROM "Post" WHERE id = %s', (place_id,))
+    conn.commit()
+    cur.close(); conn.close()
+
+    invalidate_cache()  # rebuild without the deleted post
+
     return {"status": "deleted", "place_id": place_id}

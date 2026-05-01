@@ -7,7 +7,7 @@ import psycopg2, os, json
 router = APIRouter()
 
 def _conn():
-    return psycopg2.connect(os.getenv("postgres://99be508d44282a3a1afd94c0bd57a6546ab54d006552c343596ebe66041d5400:sk_9hF93tATSU3czfR6F3J2Y@db.prisma.io:5432/postgres?sslmode=require"))
+    return psycopg2.connect(os.getenv("DATABASE_URL"))
 
 def post_exists(place_id: str) -> bool:
     conn = _conn()

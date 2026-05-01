@@ -12,18 +12,18 @@ router = APIRouter()
 @router.post("/recommend", response_model=RecommendResponse)
 def recommend(req: RecommendRequest):
     try:
-        all_posts, all_embeddings = get_cached_corpus()   # ← both posts + tensor
+        all_posts, all_embeddings = get_cached_corpus()   # ← retrieving post and embeddings from corpus
 
         candidates, candidate_embeddings = filter_candidates(
             all_posts,
-            all_embeddings,                               # ← pass tensor in
+            all_embeddings,                               # ← filtering the candidates based on irrelevance
             budget=req.budget,
             month=req.month,
             types=req.types,
             state=req.state
         )
 
-        ranked = rank_places(req.query, candidates, candidate_embeddings)  # ← pass tensor through
+        ranked = rank_places(req.query, candidates, candidate_embeddings)  # ← compares the query with candidate_embeddings
         top = ranked[:req.top_k]
 
         results = []
